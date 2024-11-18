@@ -65,9 +65,6 @@ def menu():
             print("Opção inválida!")
 
 
-
-
-
 menu()
 
 
