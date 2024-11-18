@@ -1,85 +1,41 @@
+import json
 from datetime import datetime
 
-casas = {
-  "casas": [
-    {
-      "instalacao": "123456789",
-      "titular": "João da Silva",
-      "cpf": "111.222.333-44",
-      "cep": "07010-000",
-      "endereco": "Rua A, 123",
-      "bairro": "Centro",
-      "cidade": "Guarulhos",
-      "estado": "SP",
-      "energia": "com energia",
-      "data_ultima_medicao": "2024-11-10",
-      "tensao_ultima_medicao": 220,
-      "status_energia": "estável"
-    },
-    {
-      "instalacao": "987654321",
-      "titular": "Maria Oliveira",
-      "cpf": "555.666.777-88",
-      "cep": "07020-111",
-      "endereco": "Av. B, 456",
-      "bairro": "Jardim São Paulo",
-      "cidade": "Guarulhos",
-      "estado": "SP",
-      "energia": "sem energia",
-      "data_ultima_medicao": "2024-11-05",
-      "tensao_ultima_medicao": 0,
-      "status_energia": "sem fornecimento"
-    },
-    {
-      "instalacao": "135791357",
-      "titular": "Carlos Souza",
-      "cpf": "999.888.777-66",
-      "cep": "07030-222",
-      "endereco": "Rua C, 789",
-      "bairro": "Vila Augusta",
-      "cidade": "Guarulhos",
-      "estado": "SP",
-      "energia": "com energia",
-      "data_ultima_medicao": "2024-11-12",
-      "tensao_ultima_medicao": 127,
-      "status_energia": "oscilando"
-    },
-    {
-      "instalacao": "246824682",
-      "titular": "Ana Costa",
-      "cpf": "222.333.444-55",
-      "cep": "07040-333",
-      "endereco": "Av. D, 321",
-      "bairro": "Gopoúva",
-      "cidade": "Guarulhos",
-      "estado": "SP",
-      "energia": "sem energia",
-      "data_ultima_medicao": "2024-11-08",
-      "tensao_ultima_medicao": 0,
-      "status_energia": "frequentes quedas"
-    },
-    {
-      "instalacao": "112233445",
-      "titular": "Pedro Fernandes",
-      "cpf": "123.456.789-00",
-      "cep": "07050-444",
-      "endereco": "Rua E, 654",
-      "bairro": "Jardim Tranquilidade",
-      "cidade": "Guarulhos",
-      "estado": "SP",
-      "energia": "com energia",
-      "data_ultima_medicao": "2024-11-14",
-      "tensao_ultima_medicao": 220,
-      "status_energia": "estável"
-    }
-  ]
-}
 
+# Função para carregar dados do arquivo dados.json
+def carregarCasas():
+    try:
+        with open("dados.json", "r", encoding="utf-8") as arquivo:
+            return json.load(arquivo)
+    except FileNotFoundError:
+        print("Arquivo 'dados.json' não encontrado.")
+        return {}
+    except json.JSONDecodeError:
+        print("Erro ao decodificar o arquivo JSON. O arquivo pode estar corrompido.")
+        return {}
+    except Exception as e:
+        print(f"Ocorreu um erro inesperado ao ler o arquivo: {e}")
+        return {}
+
+# Função para salvar dados no arquivo JSON
+def salvarCasas(casas):
+    try:
+        with open("dados.json", "w", encoding="utf-8") as arquivo:
+            json.dump(casas, arquivo, indent=4, ensure_ascii=False)
+        print("Dados atualizados com sucesso.")
+    except Exception as e:
+        print("Erro ao salvar dados:", e)
 
 
 def visualizarTodasCasas():
+    # Carregar os dados do arquivo JSON
+    casas = carregarCasas()
+
+    # Verificar se o arquivo foi carregado corretamente
+    if not casas:
+        return "Nenhuma casa encontrada."
+
     casas_dados = ''
-    print('\nAqui estão todas as casas que estão com e sem energia:')
     tituloCasasComESemEnergia = "Casas Que Estão Com e Sem Energia Elétrica Na Cidade de Guarulhos No Momento"
     for casa in casas["casas"]:
         casas_dados += (
@@ -102,10 +58,16 @@ def visualizarTodasCasas():
 
 
 def visualizarCasasSemEnergia():
+    # Carregar os dados do arquivo JSON
+    casas = carregarCasas()
+
+    # Verificar se o arquivo foi carregado corretamente
+    if not casas:
+        return "Nenhuma casa encontrada."
+
     casas_sem_energia = [casa for casa in casas["casas"] if casa["energia"] == "sem energia"]
 
     casas_sem_energia_dados = ''
-    print('Aqui estão todas as casas que estão sem energia:')
     tituloCasasSemEnergia = "Casas Que Estão Sem Energia Elétrica Na Cidade de Guarulhos No Momento"
     for casa in casas_sem_energia:
         casas_sem_energia_dados += (
@@ -128,10 +90,16 @@ def visualizarCasasSemEnergia():
 
 
 def visualizarCasasComEnergia():
+    # Carregar os dados do arquivo JSON
+    casas = carregarCasas()
+
+    # Verificar se o arquivo foi carregado corretamente
+    if not casas:
+        return "Nenhuma casa encontrada."
+
     casas_com_energia = [casa for casa in casas["casas"] if casa["energia"] == "com energia"]
 
     casas_com_energia_dados = ''
-    print('Aqui estão todas as casas que estão com energia:')
     tituloCasasComEnergia = "Casas Que Estão Com Energia Elétrica Na Cidade de Guarulhos No Momento"
     for casa in casas_com_energia:
         casas_com_energia_dados += (
@@ -152,6 +120,13 @@ def visualizarCasasComEnergia():
 
 
 def buscarCasaPorInstalacao():
+    # Carregar os dados do arquivo JSON
+    casas = carregarCasas()
+
+    # Verificar se o arquivo foi carregado corretamente
+    if not casas:
+        return "Nenhuma casa encontrada."
+
     instalacao = input("Digite o número de instalação da casa a ser buscada: ")
     for casa in casas["casas"]:
         if casa["instalacao"] == instalacao:
@@ -173,11 +148,19 @@ def buscarCasaPorInstalacao():
 
 
 def excluirCasa():
+    # Carregar os dados do arquivo JSON
+    casas = carregarCasas()
+
+    # Verificar se o arquivo foi carregado corretamente
+    if not casas:
+        return "Nenhuma casa encontrada."
+
     instalacao = input("Digite o número de instalação da casa a ser excluída: ")
     for casa in casas["casas"]:
         if casa["instalacao"] == instalacao:
             casas["casas"].remove(casa)
             print(f"A casa com instalação {instalacao} foi excluída.")
+            salvarCasas(casas)
             return
     print("Instalação não encontrada.")
 
@@ -204,7 +187,7 @@ def gerarRelatorio(requerente):
     largura_linha = 80  # Define a largura da linha. Ajuste conforme necessário
 
     # Formata a linha com a nome à esquerda e o data à direita
-    linha = f"{requerente}".ljust(largura_linha - len(f" {data_atual}")) + f" {data_atual}"
+    linha = f"Usuário requerente: {requerente}".ljust(largura_linha - len(f" {data_atual}")) + f" {data_atual}"
 
     # Calcula o número de espaços à esquerda para centralizar o texto
     espacos_necessarios = (largura_linha - len(titulo)) // 2
@@ -215,6 +198,7 @@ def gerarRelatorio(requerente):
     arquivo.write(f"{linha}\n")
     arquivo.write("\n"+linha_centralizada+"\n")
     arquivo.write(f"{texto}\n")
+    arquivo.close()
 
 
 

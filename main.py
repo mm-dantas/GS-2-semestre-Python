@@ -4,8 +4,7 @@ contribuidores = {
     "MatheusDantas": "matheus123",
     "LucasRafael": "lucas123",
     "JulioSouza": "julio123",
-    "NeymarJr": "neymar123",
-    "a" : "a"
+    "NeymarJr": "neymar123"
 }
 
 
@@ -18,7 +17,7 @@ def entrar():
         return True, nomeUsuario
     else:
         print("Senha ou nome de usário incorretos. Acesso negado!")
-        return None
+        return False, None
 
 def menu():
     acesso, nomeUsuario = entrar()
@@ -35,8 +34,12 @@ def menu():
               "6 - Gerar relatório; \n"
               "7 - Sair"
               )
+        try:
+            opcao = int(input("Digite a opção desejada: "))
+        except ValueError:
+            print("Opção inválida! Digite um doas números que há no menu.")
+            continue
 
-        opcao = int(input("Digite a opção desejada: "))
         if opcao == 1:
             titulo, dados = visualizarTodasCasas()
             print(titulo)

@@ -1,0 +1,74 @@
+{
+  "casas": [
+    {
+      "instalacao": "123456789",
+      "titular": "João da Silva",
+      "cpf": "111.222.333-44",
+      "cep": "07010-000",
+      "endereco": "Rua A, 123",
+      "bairro": "Centro",
+      "cidade": "Guarulhos",
+      "estado": "SP",
+      "energia": "com energia",
+      "data_ultima_medicao": "2024-11-10",
+      "tensao_ultima_medicao": 220,
+      "status_energia": "estável"
+    },
+    {
+      "instalacao": "987654321",
+      "titular": "Maria Oliveira",
+      "cpf": "555.666.777-88",
+      "cep": "07020-111",
+      "endereco": "Av. B, 456",
+      "bairro": "Jardim São Paulo",
+      "cidade": "Guarulhos",
+      "estado": "SP",
+      "energia": "sem energia",
+      "data_ultima_medicao": "2024-11-05",
+      "tensao_ultima_medicao": 0,
+      "status_energia": "sem fornecimento"
+    },
+    {
+      "instalacao": "135791357",
+      "titular": "Carlos Souza",
+      "cpf": "999.888.777-66",
+      "cep": "07030-222",
+      "endereco": "Rua C, 789",
+      "bairro": "Vila Augusta",
+      "cidade": "Guarulhos",
+      "estado": "SP",
+      "energia": "com energia",
+      "data_ultima_medicao": "2024-11-12",
+      "tensao_ultima_medicao": 127,
+      "status_energia": "oscilando"
+    },
+    {
+      "instalacao": "246824682",
+      "titular": "Ana Costa",
+      "cpf": "222.333.444-55",
+      "cep": "07040-333",
+      "endereco": "Av. D, 321",
+      "bairro": "Gopoúva",
+      "cidade": "Guarulhos",
+      "estado": "SP",
+      "energia": "sem energia",
+      "data_ultima_medicao": "2024-11-08",
+      "tensao_ultima_medicao": 0,
+      "status_energia": "frequentes quedas"
+    },
+    {
+      "instalacao": "112233445",
+      "titular": "Pedro Fernandes",
+      "cpf": "123.456.789-00",
+      "cep": "07050-444",
+      "endereco": "Rua E, 654",
+      "bairro": "Jardim Tranquilidade",
+      "cidade": "Guarulhos",
+      "estado": "SP",
+      "energia": "com energia",
+      "data_ultima_medicao": "2024-11-14",
+      "tensao_ultima_medicao": 220,
+      "status_energia": "estável"
+    }
+  ]
+}
