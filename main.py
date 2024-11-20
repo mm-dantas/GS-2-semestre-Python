@@ -10,7 +10,7 @@ contribuidores = {
 
 
 def entrar():
-    nomeUsuario = input("Para começar digite seu nome de usuário:")
+    nomeUsuario = input("Para começar digite seu nome de usuário: ")
     senha = input("Digite sua senha: ")
     if nomeUsuario in contribuidores and senha == contribuidores[nomeUsuario]:
         print("Acesso consedido")

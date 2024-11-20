@@ -219,10 +219,14 @@ def editarDadosCasa():
 #função para gerar um arquivo txt que nele mostra as casas que estão com ou sem energia, ou até todas elas
 def gerarRelatorio(requerente):
     print("Você deseja gerar um relatório sobre:")
-    opcaoRelatorio = int(input("1 - as casas sem energia;\n"
-                               "2 - as casas com energia;\n"
-                               "3 - as casas com e sem energia.\n"
-                               "Selecione a opção desejada: "))
+    try:
+        opcaoRelatorio = int(input("1 - as casas sem energia;\n"
+                                   "2 - as casas com energia;\n"
+                                   "3 - as casas com e sem energia.\n"
+                                   "Selecione a opção desejada: "))
+    except ValueError:
+        print("Entrada inválida. Por favor, insira um número entre 1 e 3.")
+        return
 
     if opcaoRelatorio == 1:
         titulo, texto = visualizarCasasSemEnergia()
@@ -230,6 +234,9 @@ def gerarRelatorio(requerente):
         titulo, texto = visualizarCasasComEnergia()
     elif opcaoRelatorio == 3:
         titulo, texto = visualizarTodasCasas()
+    else:
+        print("Opção inválida. Relatório não gerado.")
+        return
 
 
     data_atual = "Data: " + datetime.now().strftime("%d/%m/%Y")
@@ -251,6 +258,7 @@ def gerarRelatorio(requerente):
     arquivo.write("\n"+linha_centralizada+"\n")
     arquivo.write(f"{texto}\n")
     arquivo.close()
+    print("Relatório gerado com sucesso no arquivo 'relatorio.txt'!")
 
 
 
