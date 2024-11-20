@@ -17,7 +17,8 @@ def carregarCasas():
         print(f"Ocorreu um erro inesperado ao ler o arquivo: {e}")
         return {}
 
-# Função para salvar dados no arquivo JSON
+
+# Função para salvar dados no arquivo dados.json
 def salvarCasas(casas):
     try:
         with open("dados.json", "w", encoding="utf-8") as arquivo:
@@ -27,6 +28,7 @@ def salvarCasas(casas):
         print("Erro ao salvar dados:", e)
 
 
+#Função para visualizar todas as casas cadastradas no sistema
 def visualizarTodasCasas():
     # Carregar os dados do arquivo JSON
     casas = carregarCasas()
@@ -56,7 +58,7 @@ def visualizarTodasCasas():
     return tituloCasasComESemEnergia, casas_dados
 
 
-
+# Função para visualizar as casas que estão sem enregia
 def visualizarCasasSemEnergia():
     # Carregar os dados do arquivo JSON
     casas = carregarCasas()
@@ -88,7 +90,7 @@ def visualizarCasasSemEnergia():
 
 
 
-
+# Função para visualizar as casas que estão com enregia
 def visualizarCasasComEnergia():
     # Carregar os dados do arquivo JSON
     casas = carregarCasas()
@@ -119,6 +121,7 @@ def visualizarCasasComEnergia():
     return tituloCasasComEnergia, casas_com_energia_dados
 
 
+#função para buscar casa pela intalação digitada pelo usuário
 def buscarCasaPorInstalacao():
     # Carregar os dados do arquivo JSON
     casas = carregarCasas()
@@ -147,6 +150,7 @@ def buscarCasaPorInstalacao():
     print("Instalação não encontrada.")
 
 
+#função para excluir uma casa do sistema (arquivo json)
 def excluirCasa():
     # Carregar os dados do arquivo JSON
     casas = carregarCasas()
@@ -165,6 +169,54 @@ def excluirCasa():
     print("Instalação não encontrada.")
 
 
+#função para editar qualquer dado de uma casa no arquivo JSON
+def editarDadosCasa():
+    # Carregar os dados do arquivo JSON
+    casas = carregarCasas()
+
+    # Verificar se o arquivo foi carregado corretamente
+    if not casas:
+        return "Nenhuma casa encontrada."
+
+   # Solicitar ao usuário o número da instalação
+    instalacao = input("Digite o número de instalação da casa que deseja editar algum dado: ")
+    casa_encontrada = None
+
+    # Procurar a casa pela instalação
+    for casa in casas["casas"]:
+        if casa["instalacao"] == instalacao:
+            casa_encontrada = casa
+            break
+
+    if not casa_encontrada:
+        print("Instalação não encontrada.")
+        return
+
+    # Mostrar os campos que podem ser editados
+    print("Campos disponíveis para edição:")
+    for i, chave in enumerate(casa_encontrada.keys(), start=1):
+        print(f"{i} - {chave}: {casa_encontrada[chave]}")
+
+    try:
+        # Solicitar ao usuário o campo a ser editado
+        campo_index = int(input("Digite o número do campo que deseja editar: "))
+        campo_chave = list(casa_encontrada.keys())[campo_index - 1]
+    except (ValueError, IndexError):
+        print("Opção inválida. Tente novamente.")
+        return
+
+    # Solicitar o novo valor
+    novo_valor = input(f"Digite o novo valor para {campo_chave}: ")
+
+    # Atualizar o valor
+    casa_encontrada[campo_chave] = novo_valor
+
+    # Salvar os dados atualizados no arquivo JSON
+    salvarCasas(casas)
+    print(f"O campo '{campo_chave}' foi atualizado com sucesso.")
+
+
+#função para gerar um arquivo txt que nele mostra as casas que estão com ou sem energia, ou até todas elas
 def gerarRelatorio(requerente):
     print("Você deseja gerar um relatório sobre:")
     opcaoRelatorio = int(input("1 - as casas sem energia;\n"

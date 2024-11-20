@@ -31,8 +31,9 @@ def menu():
               "3 - Visualizar casas com energia; \n"
               "4 - Buscar casa por instalação; \n"
               "5 - Excluir casa; \n"
-              "6 - Gerar relatório; \n"
-              "7 - Sair"
+              "6 - Editar dados de uma casa; \n"
+              "7 - Gerar relatório; \n"
+              "8 - Sair"
               )
         try:
             opcao = int(input("Digite a opção desejada: "))
@@ -53,12 +54,14 @@ def menu():
             print(titulo)
             print(dados)
         elif opcao == 4:
-            excluirCasa()
-        elif opcao == 5:
             buscarCasaPorInstalacao()
+        elif opcao == 5:
+            excluirCasa()
         elif opcao == 6:
-            gerarRelatorio(nomeUsuario)
+            editarDadosCasa()
         elif opcao == 7:
+            gerarRelatorio(nomeUsuario)
+        elif opcao == 8:
             print("Saindo...")
             return None
         else:
