@@ -44,6 +44,7 @@ Esse software contribui para uma **melhor gestão e manutenção da rede elétri
 **Visualizar Casas com Energia**
 1.	Escolha a opção 3 no menu principal.
 2.	O sistema exibirá os detalhes de todas as residências com energia elétrica.
+
 **Gerar Relatório**
 1.	Escolha a opção 7.
 2.	Selecione o tipo de relatório desejado:
